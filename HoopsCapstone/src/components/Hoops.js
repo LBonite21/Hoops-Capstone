@@ -11,11 +11,23 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Font from "expo-font";
-import Login from './login';
+import Login from "./login";
 
 const MainPage = ({ navigation, route }) => {
   return (
-    <Login />
+    <View style={styles.container}>
+      <Login />
+      <TouchableOpacity
+        style={styles.home_btn}
+        onPress={() => {
+          navigation.navigate("SignUpPage", {
+            name: "Sign-Up Page",
+          });
+        }}
+      >
+        <Text>Sign-Up Page</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -49,3 +61,18 @@ export default class Hoops extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+
+  home_btn: {
+    marginTop: 35,
+    backgroundColor: "#355a20",
+    padding: 9,
+    borderRadius: 2,
+  },
+});

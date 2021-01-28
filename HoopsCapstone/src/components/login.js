@@ -18,29 +18,6 @@ export default class Login extends Component {
   }
 
   render() {
-    return (
-      <View>
-        <Text>Login Page</Text>\
-        <TouchableOpacity
-          style={styles.home_btn}
-          onPress={() => {
-            navigation.navigate("SignUpPage", {
-              name: "Sign-Up Page",
-            });
-          }}
-        >
-          <Text>Sign-Up Page</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    return <Text>Login Page</Text>;
   }
 }
-
-const styles = StyleSheet.create({
-  home_btn: {
-    marginTop: 35,
-    backgroundColor: "#355a20",
-    padding: 9,
-    borderRadius: 2,
-  },
-});
