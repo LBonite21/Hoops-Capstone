@@ -26,7 +26,7 @@ import * as Font from "expo-font";
 
 // export default UsernameInput;
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
   }
@@ -62,3 +62,5 @@ const styles = StyleSheet.create({
     borderBottomColor: "#000"
   },
 });
+
+export default Login;

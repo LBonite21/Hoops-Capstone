@@ -41,7 +41,7 @@ const SignUpPage = ({ navigation, route }) => {
 
 const Stack = createStackNavigator();
 
-export default class Hoops extends Component {
+class Hoops extends Component {
   constructor(props) {
     super(props);
   }
@@ -61,6 +61,8 @@ export default class Hoops extends Component {
     );
   }
 }
+
+export default Hoops;
 
 const styles = StyleSheet.create({
   container: {
