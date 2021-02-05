@@ -11,7 +11,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Font from "expo-font";
-import Login from "./login";
+import Login from "./Login";
 
 const MainPage = ({ navigation, route }) => {
   return (
