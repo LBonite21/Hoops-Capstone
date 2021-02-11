@@ -11,7 +11,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScrollView } from "react-native-gesture-handler";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
 
 // const UsernameTextInput = () => {
@@ -46,7 +46,7 @@ class Login extends Component {
   }
 
   componentDidMount = () => {
-    fetch("http://localhost:3000/", {
+    fetch("http://localhost:3002/", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -81,7 +81,7 @@ class Login extends Component {
       password: `${this.state.password}`,
     };
 
-    fetch("http://localhost:3000/", {
+    fetch("http://localhost:3002/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -105,80 +105,62 @@ class Login extends Component {
   render() {
     let wrong_credentials = <Text></Text>;
     if (this.state.wrong_credentials) {
-      wrong_credentials = <Text className='alert'>Username or Password is incorrect.</Text>;
+      wrong_credentials = <Text>Username or Password is incorrect.</Text>;
     }
 
     let afterLoggedIn;
     let beforeLoggedIn = (
-      // <div className="login-form">
       <>
-        <Text className="title-before">Hoops</Text>
-        {/* <img src="./img/dingo.png" className="login-dingo-before"/> */}
-        <Text htmlFor="username">Username </Text>
-        
-        <TextInput type="text" name="username" placeholder="Username..." className="login-TextInput" onChange={this.updateUsername} />
-        
-        { wrong_credentials }
-        
-        <Text htmlFor="password">Password </Text>
-        
-        <TextInput type="password" name="password" placeholder="Password..." className="login-TextInput" onChange={this.updatePassword} />
-        
-        
-        
-        <TouchableOpacity onClick={this.handleSignIn} className="any-btn">
-          Log In
+        <Text>Hoops</Text>
+        <Text>Username </Text>
+
+        <TextInput placeholder="Username..." onChange={this.updateUsername} />
+
+        {wrong_credentials}
+
+        <Text>Password </Text>
+
+        <TextInput placeholder="Password..." onChange={this.updatePassword} />
+
+        <TouchableOpacity onClick={this.handleSignIn}>
+          <Text>Log in</Text>
         </TouchableOpacity>
-        
-        
-        
-        <Text className="signup-Text">Not a member? </Text>
-        <TouchableOpacity href="/signUp" className="any-btn">Sign Up!</TouchableOpacity>
+
+        <Text>Not a member? </Text>
+        <TouchableOpacity>Sign Up!</TouchableOpacity>
         <Text>agustind</Text>
         <Text>UoNt-Kvx2</Text>
-        </>
-      // </div>
+      </>
     );
 
     if (this.state.redirect || AsyncStorage.getItem("user")) {
       beforeLoggedIn = <Text></Text>;
       afterLoggedIn = (
-          <>
-            <Text className="title-after">WELCOME TO FANDINGO!</Text>
+        <>
+          <Text>WELCOME TO FANDINGO!</Text>
 
-            <TouchableOpacity href="/movies" className="any-btn">Visit Movie Page!</TouchableOpacity>
-            
-            
-            {/* <img src="./img/dingo.png" className="login-dingo-after"/> */}
+          <TouchableOpacity>
+            <Text>Vist Page</Text>
+          </TouchableOpacity>
         </>
       );
     }
 
     return (
       <>
-      {/* <div className="login-container"> */}
-          {beforeLoggedIn}
-          {afterLoggedIn}
-            {/* <div className='personality-container'>
-              <h2>
-                This website is for all shapes and sizes! Male and females as well as anything 
-                in between are welcome to view our website!
-              </h2>
-              <h2>
-                Handmade by the Grunts at Neumont
-              </h2>
-            </div> */}
-          {/* </div> */}
-
-
-        {/* <Text style={styles.Text_text}>Username</Text>
-        <TextTextInput style={styles.placeholder_text} placeholder="Username" />
-
-        <Text style={styles.Text_text}>Password</Text>
-        <TextTextInput style={styles.placeholder_text} placeholder="Password" /> */}
+        {beforeLoggedIn}
+        {/* {afterLoggedIn} */}
       </>
     );
   }
+}
+
+{
+  /* <Text style={styles.Text_text}>Username</Text>
+<TextTextInput style={styles.placeholder_text} placeholder="Username" />
+
+<Text style={styles.Text_text}>Password</Text>
+<TextTextInput style={styles.placeholder_text} placeholder="Password" /> */
 }
 
 const styles = StyleSheet.create({
