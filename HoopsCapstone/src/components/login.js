@@ -127,24 +127,26 @@ class Login extends Component {
         </TouchableOpacity>
 
         <Text>Not a member? </Text>
-        <TouchableOpacity>Sign Up!</TouchableOpacity>
+        <TouchableOpacity>
+          <Text>Sign Up!</Text>
+        </TouchableOpacity>
         <Text>agustind</Text>
         <Text>UoNt-Kvx2</Text>
       </>
     );
 
-    if (this.state.redirect || AsyncStorage.getItem("user")) {
-      beforeLoggedIn = <Text></Text>;
-      afterLoggedIn = (
-        <>
-          <Text>WELCOME TO FANDINGO!</Text>
+    // if (this.state.redirect || AsyncStorage.getItem("user")) {
+    //   beforeLoggedIn = <Text>heelo</Text>;
+    //   afterLoggedIn = (
+    //     <>
+    //       <Text>WELCOME TO FANDINGO!</Text>
 
-          <TouchableOpacity>
-            <Text>Vist Page</Text>
-          </TouchableOpacity>
-        </>
-      );
-    }
+    //       <TouchableOpacity>
+    //         <Text>Vist Page</Text>
+    //       </TouchableOpacity>
+    //     </>
+    //   );
+    // }
 
     return (
       <>

@@ -8,7 +8,8 @@ require('./model/AccountModel');
 const Account = mongoose.model("account");
 
 let password = "qgqYI52yqFJvnIXt";
-const mongoUri = `mongodb+srv://lemon:${password}@hoops.8snys.mongodb.net/test`;
+let dbName = "HoopsCapstone";
+const mongoUri = `mongodb+srv://lemon:${password}@hoops.8snys.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
@@ -25,9 +26,8 @@ mongoose.connection.on("error", (err) => {
 app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/', (req, res) => {
-    res.send("Welcome to Node JS")
-});
+const routes = require('./routes');
+routes(app);
 
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);

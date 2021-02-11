@@ -2,6 +2,18 @@ let mongoose = require('mongoose');
 let account = require('../model/AccountModel');
 const bcrypt = require('bcrypt');
 
+exports.root = (req, res) => {
+    res.send("API is running!");
+}
+
+// Lists all the users
+exports.list = (req, res) => {
+    account.find({}, (err, result) => {
+        if (err) res.send(err);
+        res.json(result);
+    });
+}
+
 exports.handleSignIn = (req, res) => {
     let name = req.body.username;
     let password = req.body.password;
