@@ -126,12 +126,7 @@ class Login extends Component {
           <Text>Log in</Text>
         </TouchableOpacity>
 
-        <Text>Not a member? </Text>
-        <TouchableOpacity>
-          <Text>Sign Up!</Text>
-        </TouchableOpacity>
-        <Text>agustind</Text>
-        <Text>UoNt-Kvx2</Text>
+        
       </>
     );
 
