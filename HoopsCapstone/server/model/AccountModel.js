@@ -8,16 +8,16 @@ const AccountSchema = new mongoose.Schema({
     username: {
         type: String
     },
-    email: {
-        type: String
-    },
-    password: {
-        type: String
-    },
     fname: {
         type: String
     },
     lname: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    password: {
         type: String
     },
     state: {

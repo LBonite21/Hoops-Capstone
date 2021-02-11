@@ -5,9 +5,11 @@ from pymongo import MongoClient
 import bcrypt
 import csv
 
-client = MongoClient(port=27017)
+client = MongoClient('mongodb+srv://lemon:qgqYI52yqFJvnIXt@hoops.8snys.mongodb.net/HoopsCapstone?retryWrites=true&w=majority')
 
-db = client.fandingo
+db = client.get_database('HoopsCapstone')
+
+accounts = db.accounts
 
 with open('users4.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -27,18 +29,15 @@ with open('users4.csv') as csv_file:
                 'username' : f'{row[0].lower()}{row[1][0].lower()}',
                 'fname' : row[0],
                 'lname' : row[1],
-                'street' : row[2],
-                'city' : row[3],
                 'state' : row[4],
                 'zip_code' : row[5],
                 'email' : row[6],
                 'password' : row[7],
-                'phone' : row[8],
                 'reviews' : []
             }
 
             # Inserting user into database
-            result = db.accounts.insert_one(user)
+            result = accounts.insert_one(user)
 
             # Confirming that the object was successfully inserted into the database.
             print(f'Created {result.inserted_id}')
