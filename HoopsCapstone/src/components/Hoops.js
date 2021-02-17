@@ -9,12 +9,17 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Font from "expo-font";
 import Login from "./Login";
 
 const MainPage = ({ navigation, route }) => {
-  return (
+  return AsyncStorage.getItem('auth') === true ? (
+    <>
+      <SignUpPage />
+    </>
+  ) : (
     <View style={styles.container}>
       <Login />
       <TouchableOpacity
