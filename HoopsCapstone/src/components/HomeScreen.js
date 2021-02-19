@@ -5,34 +5,29 @@ import {
   TouchableOpacity,
   TextInput,
   View,
-  Dimensions,
+  Button,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { ScrollView } from "react-native-gesture-handler";
+import * as Animatable from "react-native-animatable";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
-import MapView from "react-native-maps";
 
-const MapScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} />
+      <Text>Home Screen</Text>
     </View>
   );
 };
 
-export default MapScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-  map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
   },
 });
