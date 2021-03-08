@@ -14,6 +14,32 @@ exports.list = (req, res) => {
     });
 }
 
+exports.findByUsername = (req, res) => {
+    let name = req.body.username;
+    account.findOne({ username: name }, (err, account) => {
+        if (err) res.json({
+            status: false,
+            account: ""
+        });
+        console.log(account.password);
+        bcrypt.compare(password, account.password, (err, response) => {
+            if (err) console.log(err);
+
+            if (response) {
+                res.json({
+                    status: true,
+                    account: account //set token
+                })
+            } else {
+                res.json({
+                    status: false,
+                    account: ""
+                })
+            }
+        });
+    });
+}
+
 exports.handleSignIn = (req, res) => {
     let name = req.body.username;
     let password = req.body.password;
@@ -22,7 +48,7 @@ exports.handleSignIn = (req, res) => {
         account.findOne({ username: name }, (err, account) => {
             if (err) res.json({
                 status: false,
-                account: ""
+                account: {}
             });
             console.log(account.password);
             bcrypt.compare(password, account.password, (err, response) => {
@@ -36,7 +62,7 @@ exports.handleSignIn = (req, res) => {
                 } else {
                     res.json({
                         status: false,
-                        account: ""
+                        account: {}
                     })
                 }
             });
@@ -44,7 +70,7 @@ exports.handleSignIn = (req, res) => {
     } else {
         res.json({
             status: false,
-            account: ""
+            account:{}
         });
     }
 }

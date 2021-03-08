@@ -3,5 +3,5 @@ module.exports = function(app) {
 
     app.route('/')
     .get(controller.list)
-    .post(controller.handleSignIn)
+    // .post(controller.handleSignIn)
 }

@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   View,
+  Image
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -70,7 +71,8 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 35, letterSpacing: 3}}>Hoops</Text>
+      {/* <Text style={{fontSize: 35, letterSpacing: 3}}>Hoops</Text> */}
+      <Image style={styles.title} source={require('../../images/Title.png')}/>
       <Text style={styles.body_text}>Username</Text>
       <TextInput
         style={styles.borderInput_text}
@@ -124,6 +126,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#fff",
+  },
+
+  title: {
+    resizeMode: "contain",
+    width: 290
   },
 
   body_text: {
