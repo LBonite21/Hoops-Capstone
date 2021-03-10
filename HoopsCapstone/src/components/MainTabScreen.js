@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
-import HomeScreen from "./HomeScreen";
+import NewsScreen from "./NewsScreen";
 import MapScreen from "./MapScreen";
 // import DetailsScreen from './DetailsScreen';
 // import ExploreScreen from './ExploreScreen';
@@ -15,6 +15,66 @@ const HomeStack = createStackNavigator();
 const MapStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
+
+const HomeStackScreen = ({ navigation }) => (
+  <HomeStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: "#7f0000",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+      },
+    }}
+  >
+    <HomeStack.Screen
+      name="NBA News"
+      component={NewsScreen}
+      options={{
+        title: "NBA News",
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="#7f0000"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+  </HomeStack.Navigator>
+);
+
+const MapStackScreen = ({ navigation }) => (
+  <MapStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: "#7f0000",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+      },
+    }}
+  >
+    <MapStack.Screen
+      name="Hoops"
+      component={MapScreen}
+      options={{
+        title: " ",
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="#7f0000"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+  </MapStack.Navigator>
+);
 
 const MainTabScreen = () => (
   <Tab.Navigator initialRouteName="Map" activeColor="#fff">
@@ -67,61 +127,4 @@ const MainTabScreen = () => (
 
 export default MainTabScreen;
 
-const HomeStackScreen = ({ navigation }) => (
-  <HomeStack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: "#009387",
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}
-  >
-    <HomeStack.Screen
-      name="Home"
-      component={HomeScreen}
-      options={{
-        title: "Overview",
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}
-          ></Icon.Button>
-        ),
-      }}
-    />
-  </HomeStack.Navigator>
-);
 
-const MapStackScreen = ({ navigation }) => (
-  <MapStack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: "#1f65ff",
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}
-  >
-    <MapStack.Screen
-      name="Hoops"
-      component={MapScreen}
-      options={{
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
-            size={25}
-            backgroundColor="#1f65ff"
-            onPress={() => navigation.openDrawer()}
-          ></Icon.Button>
-        ),
-      }}
-    />
-  </MapStack.Navigator>
-);

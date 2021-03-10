@@ -14,7 +14,7 @@ import * as Animatable from "react-native-animatable";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
 
-const HomeScreen = ({ navigation }) => {
+const NewsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
@@ -22,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default NewsScreen;
 
 const styles = StyleSheet.create({
   container: {

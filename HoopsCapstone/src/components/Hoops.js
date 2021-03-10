@@ -21,7 +21,7 @@ import { AuthContext } from "./context";
 
 import RootStackScreen from "./RootStackScreen";
 import MapScreen from "./MapScreen";
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "./NewsScreen";
 import { DrawerContent } from "./DrawerContent";
 import MainTabScreen from "./MainTabScreen";
 
@@ -119,9 +119,13 @@ const Hoops = () => {
         }
         dispatch({ type: "LOGOUT" });
       },
-      signUp: () => {
-        setUserToken("fasdf");
-        setIsLoading(false);
+      signUp: async (email, username, password) => {
+        // setUserToken("fasdf");
+        // setIsLoading(false);
+        //send data to back end
+        //after sign up login
+
+        dispatch({ type: "REGISTER", id: username, token: userToken})
       },
     }),
     []
@@ -150,21 +154,21 @@ const Hoops = () => {
     );
   }
 
-  const TestScreen = () => {
-    const { signOut } = React.useContext(AuthContext);
+  // const TestScreen = () => {
+  //   const { signOut } = React.useContext(AuthContext);
 
-    return (
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            signOut();
-          }}
-        >
-          <Text>Sign Out</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  //   return (
+  //     <View>
+  //       <TouchableOpacity
+  //         onPress={() => {
+  //           signOut();
+  //         }}
+  //       >
+  //         <Text>Sign Out</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // };
 
   return (
     <AuthContext.Provider value={authContext}>
