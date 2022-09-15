@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,13 +11,14 @@ import MapScreen from "./MapScreen";
 // import ExploreScreen from './ExploreScreen';
 // import ProfileScreen from './ProfileScreen';
 
-const HomeStack = createStackNavigator();
+const NewsStack = createStackNavigator();
 const MapStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
-const HomeStackScreen = ({ navigation }) => (
-  <HomeStack.Navigator
+const NewsStackScreen = ({ navigation }) => (
+  
+  <NewsStack.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: "#7f0000",
@@ -28,11 +29,11 @@ const HomeStackScreen = ({ navigation }) => (
       },
     }}
   >
-    <HomeStack.Screen
+    <NewsStack.Screen
       name="NBA News"
       component={NewsScreen}
       options={{
-        title: "NBA News",
+        title: " ",
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
@@ -43,7 +44,7 @@ const HomeStackScreen = ({ navigation }) => (
         ),
       }}
     />
-  </HomeStack.Navigator>
+  </NewsStack.Navigator>
 );
 
 const MapStackScreen = ({ navigation }) => (
@@ -66,10 +67,17 @@ const MapStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            color= "#fff"
             size={25}
             backgroundColor="#7f0000"
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
+        ),
+        headerRight: () => (
+          <Icon.Button 
+            name="filter"
+            backgroundColor="#7f0000"
+          />
         ),
       }}
     />
@@ -77,13 +85,14 @@ const MapStackScreen = ({ navigation }) => (
 );
 
 const MainTabScreen = () => (
-  <Tab.Navigator initialRouteName="Map" activeColor="#fff">
+
+  <Tab.Navigator initialRouteName="Map" activeColor="#7f0000" barStyle={{ backgroundColor: "#fff" }}>
     <Tab.Screen
       name="Map"
       component={MapStackScreen}
       options={{
         tabBarLabel: "Map",
-        tabBarColor: "#1f65ff",
+        tabBarColor: "#7f0000",
         tabBarIcon: ({ color }) => (
           <Icon name="ios-map" color={color} size={26} />
         ),
@@ -91,7 +100,7 @@ const MainTabScreen = () => (
     />
     <Tab.Screen
       name="News"
-      component={HomeStackScreen}
+      component={NewsStackScreen}
       options={{
         tabBarLabel: "NBA News",
         tabBarColor: "#009387",
@@ -100,28 +109,6 @@ const MainTabScreen = () => (
         ),
       }}
     />
-    {/* <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarColor: '#694fad',
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-person" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
-        options={{
-          tabBarLabel: 'Explore',
-          tabBarColor: '#d02860',
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-aperture" color={color} size={26} />
-          ),
-        }}
-      /> */}
   </Tab.Navigator>
 );
 

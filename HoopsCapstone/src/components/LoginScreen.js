@@ -51,20 +51,20 @@ const LoginScreen = ({ navigation }) => {
   const handleValidUser = (value) => {
     if (value.legnth > 3) {
       setIsValidUser(true);
-      console.log(isValidUser);
+      console.log(value);
     } else {
       setIsValidUser(false);
-      console.log(isValidUser);
+      // console.log(isValidUser);
     }
   };
 
   const handleValidPassword = (value) => {
     if (value.legnth > 4) {
       setIsValidPassword(true);
-      console.log(isValidPassword);
+      // console.log(isValidPassword);
     } else {
       setIsValidPassword(false);
-      console.log(isValidPassword);
+      // console.log(isValidPassword);
     }
   };
 

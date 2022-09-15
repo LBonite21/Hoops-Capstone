@@ -38,6 +38,26 @@ const SignUpScreen = ({ navigation }) => {
     });
   }, []);
 
+  const handleValidUser = (value) => {
+    if (value.legnth > 3) {
+      setIsValidUser(true);
+      console.log(isValidUser);
+    } else {
+      setIsValidUser(false);
+      console.log(isValidUser);
+    }
+  };
+
+  const handleValidPassword = (value) => {
+    if (value.legnth > 4) {
+      setIsValidPassword(true);
+      console.log(isValidPassword);
+    } else {
+      setIsValidPassword(false);
+      console.log(isValidPassword);
+    }
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableWithoutFeedback>

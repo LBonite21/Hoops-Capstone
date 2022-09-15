@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   Text,
   StyleSheet,
@@ -12,7 +12,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { ScrollView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
 // import Geolocation from "react-native-geolocation-service";
 
 const OGMapScreen = () => {
@@ -53,27 +53,64 @@ const OGMapScreen = () => {
   );
 };
 
+const AddCourt = () => {
+  const [isFontReady, setFontReady] = useState(false);
+
+  useEffect(() => {
+    async function loadFont() {
+      return await Font.loadAsync({
+        "OctinCollege-Reg": require("../../fonts/OctinCollege-Regular.otf"),
+        "OctinCollege-Bold": require("../../fonts/OctinCollege-Bold.ttf"),
+      });
+    }
+    // after the loading set the font status to true
+    loadFont().then(() => {
+      setFontReady(true);
+    });
+  }, []);
+
+  return (
+    // <View style={styles.addCourt_btn}>
+    <TouchableOpacity
+      style={styles.map_btn}
+      onPress={() => {
+        <Marker draggable />;
+      }}
+    >
+      {isFontReady && <Text style={styles.btn_text}>Add Court</Text>}
+    </TouchableOpacity>
+    // </View>
+  );
+};
+
 class MapScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        latitude: 0,
-        longitude: 0,
-        coordinates: [],
+      fontLoaded: false,
+      latitude: 40.7739326967638,
+      longitude: -111.90328146937225,
+      coordinates: [],
+      courts: [],
     };
   }
 
   componentDidMount() {
+    this.getLocation();
+    this.getCourts();
+  }
+
+  componentWillUnmount() {
+    this.getCourts();
+  }
+
+  getLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          // coordinates: this.state.coordinates.concat({
-          //   latitude: position.coords.latitude,
-          //   longitude: position.coords.longitude,
-          // }),
         });
       },
       (error) => {
@@ -88,13 +125,23 @@ class MapScreen extends Component {
     );
   }
 
+  getCourts() {
+    let API_KEY = `AIzaSyCst7jCRy3gYwYbxhoIlxgLT79CwHGpYZA`;
+    let FETCH_URL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.state.latitude},${this.state.longitude}&keyword=basketballcourt&radius=50000&rankby=prominence&key=${API_KEY}`;
+
+    fetch(FETCH_URL, { method: "GET" })
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ courts: json.results });
+        // console.log(json);
+      });
+  }
+
   render() {
     let myLocation = {
       latitude: this.state.latitude,
       longitude: this.state.longitude,
     };
-
-    // console.log(myLocation)
 
     return (
       <View style={styles.container}>
@@ -108,7 +155,30 @@ class MapScreen extends Component {
             longitudeDelta: 0.0421,
           }}
         >
-          <Marker coordinate={myLocation}></Marker>
+          <AddCourt />
+          <Marker
+            coordinate={myLocation}
+            image={require("../../images/myPin.png")}
+          />
+         
+
+          {this.state.courts.map((court, index) => (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: court.geometry.location.lat,
+                longitude: court.geometry.location.lng,
+              }}
+              image={require("../../images/pin.png")}
+            >
+              <Callout>
+                <View>
+                <Text>{court.name}</Text>
+                </View>
+              </Callout>
+              
+            </Marker>
+          ))}
         </MapView>
       </View>
     );
@@ -124,8 +194,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+
+  map_btn: {
+    marginTop: 80,
+    marginLeft: 265,
+    backgroundColor: "#7f0000",
+    width: 130,
+    // height: 80,
+    padding: 8,
+    paddingLeft: 2,
+    paddingRight: 2,
+    borderRadius: 2,
+  },
+
+  btn_text: {
+    // marginTop: 18,
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 12,
+    fontFamily: "OctinCollege-Bold",
+    letterSpacing: 2,
   },
 });

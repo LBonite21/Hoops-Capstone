@@ -154,22 +154,6 @@ const Hoops = () => {
     );
   }
 
-  // const TestScreen = () => {
-  //   const { signOut } = React.useContext(AuthContext);
-
-  //   return (
-  //     <View>
-  //       <TouchableOpacity
-  //         onPress={() => {
-  //           signOut();
-  //         }}
-  //       >
-  //         <Text>Sign Out</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
-  // };
-
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
